@@ -1,0 +1,61 @@
+<html>
+
+<head>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+  <script src="https://unpkg.com/@contentstack/ui-extensions-sdk@2.2.0/dist/ui-extension-sdk.js"></script>
+
+  <link rel="stylesheet" type="text/css" href="https://unpkg.com/@contentstack/ui-extensions-sdk@2.2.0/dist/ui-extension-sdk.css">
+
+</head>
+
+<body>
+
+ 
+
+<p>
+
+  YouTube Video ID: <input width="250px" id="videoID" onchange="IDChanged()"/>
+
+</p>
+
+<iframe id="videoFrame" frameborder="0" scrolling="no" allowfullscreen="allowfullscreen" marginheight="0" marginwidth="0" type="text/html" src="" sandbox="allow-scripts allow-popups allow-popups-to-escape-sandbox allow-downloads allow-same-origin"></iframe>
+
+ 
+
+<script type="text/javascript" >
+
+  window.extensionField = {};
+
+     
+
+  var video = document.getElementById("videoFrame");
+
+  var id = document.getElementById("videoID")
+
+  ContentstackUIExtension.init().then(function(extension) {
+
+      extensionField = extension;
+
+      id.value = extensionField.field.getData();
+
+      video.src = "https://www.youtube.com/embed/"+id.value;
+
+  })
+
+  function IDChanged() {
+
+                video.src = "https://www.youtube.com/embed/"+id.value;
+
+                extensionField.field.setData(id.value);     
+
+  }
+
+</script>
+
+</body>
+
+ 
+
+</html>
